@@ -9,7 +9,13 @@ import javax.persistence.Id;
 public class DipendenteModel {
 	
 	public DipendenteModel() {
-		super();
+	
+	}
+
+	public DipendenteModel(String nome, String cognome, String numeroBadge) {				
+		this.nome = nome;
+		this.cognome = cognome;
+		this.numeroBadge = numeroBadge;
 	}
 
 	@Id
