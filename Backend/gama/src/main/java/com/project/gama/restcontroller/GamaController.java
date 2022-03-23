@@ -1,4 +1,4 @@
-package com.project.gama.controller;
+package com.project.gama.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ public class GamaController {
 	
 	@GetMapping("/")
 	public DipendenteModel test() {
-		System.out.println("");		
+			
 		return repository.save(new DipendenteModel("toto", "peppino", "la mala femmina"));
 		
 	}
