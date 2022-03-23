@@ -15,8 +15,9 @@ public class GamaController {
 	
 	@GetMapping("/")
 	public DipendenteModel test() {
+		System.out.println("");		
+		return repository.save(new DipendenteModel("toto", "peppino", "la mala femmina"));
 		
-		return repository.save(new DipendenteModel("toto", "peppino", "la mala femmina"));		
 	}
 
 	
