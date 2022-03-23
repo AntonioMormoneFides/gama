@@ -5,16 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class CurriculumModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer id; 
 	
-
-	
+	@ManyToOne
+	@JoinColumn(name="idDipendente") 
+	private DipendenteModel dipendente;	
+		
 	@Column(length = 65535, columnDefinition="Text")
 	private String esperienzeStudio;
 	@Column(length = 65535, columnDefinition="Text")

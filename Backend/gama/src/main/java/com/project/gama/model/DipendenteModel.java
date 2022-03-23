@@ -1,9 +1,14 @@
 package com.project.gama.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class DipendenteModel {
@@ -17,23 +22,34 @@ public class DipendenteModel {
 		this.cognome = cognome;
 		this.numeroBadge = numeroBadge;
 	}
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@Column(name="idDipendente")
+	private Integer idDipendente;
 	
 	private String nome;
 	
 	private String cognome;
 	
 	private String numeroBadge;
+	
+	@OneToMany(mappedBy="dipendente", cascade= CascadeType.ALL)
+	private Set <RegistroEntrateUsciteModel> registro;
+	
+	@OneToMany(mappedBy="dipendente", cascade= CascadeType.ALL)
+	private Set <MansioniLavorativeModel> mansioni;
+	
+	@OneToMany(mappedBy="dipendente", cascade= CascadeType.ALL)
+	private Set <CurriculumModel> curricula;
+	
 
-	public Integer getId() {
-		return id;
+	public Integer getIdDipendente() {
+		return idDipendente;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdDipendente(Integer id) {
+		this.idDipendente = id;
 	}
 
 	public String getNome() {

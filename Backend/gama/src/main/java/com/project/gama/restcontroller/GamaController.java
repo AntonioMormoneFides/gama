@@ -1,5 +1,7 @@
 package com.project.gama.restcontroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +16,14 @@ public class GamaController {
 	private  DipendenteRepository repository;
 	
 	@GetMapping("/")
-	public DipendenteModel test() {
-			
-		return repository.save(new DipendenteModel("toto", "peppino", "la mala femmina"));
-		
+	public DipendenteModel test() {			
+		return repository.save(new DipendenteModel("toto", "peppino", "la mala femmina"));		
 	}
+	
+	@GetMapping("/alldipendenti")
+	public List<DipendenteModel> elencaDipendenti() {
+		return repository.findAll();
+	} 
 
 	
 	
