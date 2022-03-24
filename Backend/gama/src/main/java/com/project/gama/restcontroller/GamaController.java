@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.gama.model.DipendenteModel;
@@ -20,10 +21,15 @@ public class GamaController {
 		return repository.save(new DipendenteModel("toto", "peppino", "la mala femmina"));		
 	}
 	
-	@GetMapping("/alldipendenti")
+	@GetMapping("/mostradipendenti")
 	public List<DipendenteModel> elencaDipendenti() {
 		return repository.findAll();
 	} 
+	
+	@PostMapping("/cancelladipendente")
+	public List<DipendenteModel> cancellaDipendente(String numeroBadge) {
+		return repository.deleteByNumeroBadge(numeroBadge);		
+	}
 
 	
 	
