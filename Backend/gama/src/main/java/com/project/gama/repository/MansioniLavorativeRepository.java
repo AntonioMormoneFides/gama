@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.project.gama.model.DipendenteModel;
 import com.project.gama.model.MansioniLavorativeModel;
+
 @Repository
 public interface MansioniLavorativeRepository extends JpaRepository <MansioniLavorativeModel, Integer> {
-	public List<MansioniLavorativeModel> findAllByDipendente(DipendenteModel idDipendente);
-	public void deleteById(Long id);
+	public List<MansioniLavorativeModel> findAllByDipendente(DipendenteModel dipendente);
 
 }

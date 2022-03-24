@@ -39,6 +39,7 @@ public class MainService {
 			perEntrata = reur.save(new RegistroEntrateUsciteModel(LocalTime.now(), null, dataConvertita, dm));
 			mockLog = new LogPassaggioDipendenteDTO(dm.getNome(), dm.getCognome(), perEntrata.getEntrata(), null, dataConvertita);
 		} else {
+			
 			perUscita  = reur.save(new RegistroEntrateUsciteModel(mock.getId(), mock.getEntrata(), LocalTime.now(), dataConvertita, dm));
 			mockLog = new LogPassaggioDipendenteDTO(dm.getNome(), dm.getCognome(), mock.getEntrata(), perUscita.getUscita(), dataConvertita);
 		}
@@ -53,6 +54,7 @@ public class MainService {
 	
 	public List<MansioniLavorativeModel> mostraMansioniDipendente (String numeroBadge) {		
 		DipendenteModel dipendenteTrovato = dipRepository.findByNumeroBadge(numeroBadge);		
+		return mlRepository.findAllByDipendente(dipendenteTrovato);
 		return mlRepository.findAllByDipendente(dipendenteTrovato);		
 		}
 	

@@ -49,6 +49,11 @@ public class GamaController {
 		 DipendenteModel dmIn = dipRepository.save(new DipendenteModel("Gianni", "Fappucchioni", "98754gg"));
 		
 	}
+
+    @GetMapping("/test2")
+    public void testTabellaMansioniLavorative() {
+        MansioniLavorativeModel dmIn = mlr.save(new MansioniLavorativeModel(dipRepository.findByNumeroBadge("Giovanni"), "Junior Developer", "Gama project", true , true ));
+    }
 	
 	@GetMapping("/test2")
 	public void testTabellaMansioniLavorative() {
@@ -74,13 +79,26 @@ public class GamaController {
 	
 	@Transactional
 	@PostMapping("/cancelladipendente")
+	public DipendenteModel cancellaDipendente(@RequestParam("numeroBadge") String numeroBadge) {
+		
+		System.out.println("ci sono quasi");
+		
+		DipendenteModel daCancellare = dipRepository.findByNumeroBadge(numeroBadge);
+		
+		dipRepository.deleteByNumeroBadge(numeroBadge);
+		
+		return daCancellare;
+		
+//		dipRepository.deleteAll();
+//		
+//		return new DipendenteModel();
 	public String cancellaDipendente(@RequestParam("numeroBadge") String numeroBadge) {
 		dipRepository.deleteByNumeroBadge(numeroBadge);
 		return "Utente cancellato";		
 	}
 	
 	
-
+	@Transactional
 	@PostMapping("/registro")
 	public LogPassaggioDipendenteDTO passaggioTornello(@RequestParam("numeroBadge") String numeroBadge, @RequestParam("data") String data ) {
 		
@@ -88,7 +106,7 @@ public class GamaController {
 	
 	}
 	
-	
+	@Transactional
 	@PostMapping("/cambioBadge")
 	public DipendenteModel passaggio(@RequestParam("numeroVecchioBadge") String numeroVecchioBadge, @RequestParam("numeroNuovoBadge") String numeroNuovoBadge ) {
 		
@@ -97,10 +115,12 @@ public class GamaController {
 		return null;
 	}
 	
-	
+	@Transactional
 	@PostMapping("/mostradipendentimansioni")
 	public List<MansioniLavorativeModel> elencaMansioni(@RequestParam("numeroBadge") String numeroBadge) {		
 
+		System.out.println(numeroBadge);
+		
 		return command.elencaMansioniDipendente(numeroBadge);
 	
 	} 
