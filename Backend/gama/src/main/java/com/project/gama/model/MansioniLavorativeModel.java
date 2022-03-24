@@ -14,7 +14,7 @@ public class MansioniLavorativeModel {
 		
 	}
 	
-	public MansioniLavorativeModel(Integer id, String numeroBadge, String ruolo, String progetto, boolean tipoContratto,
+	public MansioniLavorativeModel(Long id, String numeroBadge, String ruolo, String progetto, boolean tipoContratto,
 			boolean statoLavorativo) {
 		super();
 		this.id = id;
@@ -31,7 +31,7 @@ public class MansioniLavorativeModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	private String numeroBadge;
 	
@@ -43,11 +43,11 @@ public class MansioniLavorativeModel {
 	
 	private boolean statoLavorativo; //IMPIEGATO= TRUE, LICENZIATO=FALSE
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
