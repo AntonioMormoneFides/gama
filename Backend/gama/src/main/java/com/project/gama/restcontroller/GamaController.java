@@ -4,10 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.gama.model.DipendenteModel;
 import com.project.gama.repository.DipendenteRepository;
+
+import dtoClasses.LogPassaggioDipendenteDTO;
 
 @RestController
 public class GamaController {
@@ -25,6 +29,31 @@ public class GamaController {
 		return repository.findAll();
 	} 
 
+	@PostMapping("/registro")
+	public LogPassaggioDipendenteDTO passaggio(@RequestParam("numeroBadge") String numeroBadge) {
+		
+		
+		
+		return null;
+	}
+	
+	
+	@GetMapping("/cambioBadge")
+	public List<DipendenteModel> passaggio() {
+		
+		
+		
+		return null;
+	}
+	
+	
+	@PostMapping("/cambioBadge")
+	public DipendenteModel passaggio(@RequestParam("numeroBadge") String numeroBadge, @RequestParam("id") int id) {
+		
+		
+	
+		return null;
+	}
 	
 	
 	
