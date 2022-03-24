@@ -1,6 +1,5 @@
 package com.project.gama.restcontroller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.gama.command.ElencaMansioniCommand;
+import com.project.gama.command.PassaggioCommand;
 import com.project.gama.model.DipendenteModel;
-import com.project.gama.model.MansioniLavorativeModel;
+import com.project.gama.model.RegistroEntrateUsciteModel;
+import com.project.gama.repository.CurriculumRepository;
 import com.project.gama.repository.DipendenteRepository;
 import com.project.gama.repository.MansioniLavorativeRepository;
-import com.project.gama.service.MainService;
+import com.project.gama.repository.RegistroEntrateUsciteRepository;
 
 import dtoClasses.LogPassaggioDipendenteDTO;
 
@@ -22,17 +22,23 @@ import dtoClasses.LogPassaggioDipendenteDTO;
 public class GamaController {
 	
 	@Autowired
-	private  DipendenteRepository dipRepository;
+	private  DipendenteRepository repository;
 	@Autowired
-	private  MansioniLavorativeRepository mlRepository;
+	private CurriculumRepository cr;
+	
 	@Autowired
-	private ElencaMansioniCommand command;
-	@Autowired
-	private MainService ma;
+	private MansioniLavorativeRepository mlr;
+	
+	@Autowired 
+	private RegistroEntrateUsciteRepository reur;
+	
+	@Autowired 
+	private PassaggioCommand pc;
 	
 	@GetMapping("/")
-	public DipendenteModel test() {			
-		return dipRepository.save(new DipendenteModel("toto", "peppino", "la mala femmina"));		
+	public void test() {			
+		 DipendenteModel dmIn = repository.save(new DipendenteModel("Gianni", "Fappucchioni", "98754gg"));
+		
 	}
 	
 	@GetMapping("/mostradipendenti")
@@ -44,13 +50,14 @@ public class GamaController {
 	public DipendenteModel cancellaDipendente(@RequestParam("numeroBadge") String numeroBadge) {
 		return dipRepository.deleteByNumeroBadge(numeroBadge);		
 	}
+	
+	
 
 	@PostMapping("/registro")
-	public LogPassaggioDipendenteDTO passaggio(@RequestParam("numeroBadge") String numeroBadge, @RequestParam("data") LocalDate data ) {
+	public LogPassaggioDipendenteDTO passaggioTornello(@RequestParam("numeroBadge") String numeroBadge, @RequestParam("data") String data ) {
 		
-		
-		
-		return null;
+		return pc.doStuff(numeroBadge, data);
+	
 	}
 	
 	

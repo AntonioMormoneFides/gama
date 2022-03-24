@@ -7,9 +7,10 @@ public class LogPassaggioDipendenteDTO {
 
 	private String nome;
 	private String cognome;
-	private LocalTime orario;
+	private LocalTime orarioEntrata;
+	private LocalTime orarioUscita;
 	private LocalDate data;
-	private boolean entrato = false;
+
 	public String getNome() {
 		return nome;
 	}
@@ -22,11 +23,18 @@ public class LogPassaggioDipendenteDTO {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-	public LocalTime getOrario() {
-		return orario;
+
+	public LocalTime getOrarioEntrata() {
+		return orarioEntrata;
 	}
-	public void setOrario(LocalTime orario) {
-		this.orario = orario;
+	public void setOrarioEntrata(LocalTime orarioEntrata) {
+		this.orarioEntrata = orarioEntrata;
+	}
+	public LocalTime getOrarioUscita() {
+		return orarioUscita;
+	}
+	public void setOrarioUscita(LocalTime orarioUscita) {
+		this.orarioUscita = orarioUscita;
 	}
 	public LocalDate getData() {
 		return data;
@@ -34,20 +42,19 @@ public class LogPassaggioDipendenteDTO {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
-	public boolean isEntrato() {
-		return entrato;
-	}
-	public void setEntrato(boolean entrato) {
-		this.entrato = entrato;
-	}
-	public LogPassaggioDipendenteDTO(String nome, String cognome, LocalTime orario, LocalDate data, boolean entrato) {
+
+	
+	public LogPassaggioDipendenteDTO(String nome, String cognome, LocalTime orarioEntrata, LocalTime orarioUscita,
+			LocalDate data) {
 		super();
 		this.nome = nome;
 		this.cognome = cognome;
-		this.orario = orario;
+		this.orarioEntrata = orarioEntrata;
+		this.orarioUscita = orarioUscita;
 		this.data = data;
-		this.entrato = entrato;
+		
 	}
+	
 	
 	public LogPassaggioDipendenteDTO() {
 		
