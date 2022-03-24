@@ -14,11 +14,10 @@ public class MansioniLavorativeModel {
 		
 	}
 	
-	public MansioniLavorativeModel(Long id, String numeroBadge, String ruolo, String progetto, boolean tipoContratto,
+	public MansioniLavorativeModel(Integer id, String ruolo, String progetto, boolean tipoContratto,
 			boolean statoLavorativo) {
 		super();
 		this.id = id;
-		this.numeroBadge = numeroBadge;
 		this.ruolo = ruolo;
 		this.progetto = progetto;
 		this.tipoContratto = tipoContratto;
@@ -33,7 +32,7 @@ public class MansioniLavorativeModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String numeroBadge;
+	
 	
 	private String ruolo;
 	
@@ -49,14 +48,6 @@ public class MansioniLavorativeModel {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getNumeroBadge() {
-		return numeroBadge;
-	}
-
-	public void setNumeroBadge(String numeroBadge) {
-		this.numeroBadge = numeroBadge;
 	}
 
 	public String getRuolo() {
