@@ -8,14 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.gama.model.DipendenteModel;
+import com.project.gama.model.MansioniLavorativeModel;
 import com.project.gama.model.RegistroEntrateUsciteModel;
 import com.project.gama.repository.DipendenteRepository;
+import com.project.gama.repository.MansioniLavorativeRepository;
 import com.project.gama.repository.RegistroEntrateUsciteRepository;
 
 import dtoClasses.LogPassaggioDipendenteDTO;
-import com.project.gama.model.MansioniLavorativeModel;
-import com.project.gama.repository.DipendenteRepository;
-import com.project.gama.repository.MansioniLavorativeRepository;
 
 @Service
 public class MainService {
@@ -26,7 +25,7 @@ public class MainService {
 	
 	public LogPassaggioDipendenteDTO passaggio(String numeroBadge, String data) {
 		
-		DipendenteModel dm = dr.findOneByNumeroBadge(numeroBadge);
+		DipendenteModel dm = dr.findByNumeroBadge(numeroBadge);
 		LocalDate dataConvertita = LocalDate.parse(data);
 		RegistroEntrateUsciteModel mock = reur.findOneByDipendenteAndGiorno(dm, dataConvertita);
 		
@@ -54,7 +53,7 @@ public class MainService {
 	
 	public List<MansioniLavorativeModel> mostraMansioniDipendente (String numeroBadge) {		
 		DipendenteModel dipendenteTrovato = dipRepository.findByNumeroBadge(numeroBadge);		
-		return mlRepository.findAllByDipendente(dipendenteTrovato.getIdDipendente());		
+		return mlRepository.findAllByDipendente(dipendenteTrovato);		
 		}
 	
 	

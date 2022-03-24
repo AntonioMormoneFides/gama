@@ -2,15 +2,19 @@ package com.project.gama.restcontroller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.gama.command.ElencaMansioniCommand;
 import com.project.gama.command.PassaggioCommand;
 import com.project.gama.model.DipendenteModel;
-import com.project.gama.model.RegistroEntrateUsciteModel;
+import com.project.gama.model.MansioniLavorativeModel;
 import com.project.gama.repository.CurriculumRepository;
 import com.project.gama.repository.DipendenteRepository;
 import com.project.gama.repository.MansioniLavorativeRepository;
@@ -22,7 +26,7 @@ import dtoClasses.LogPassaggioDipendenteDTO;
 public class GamaController {
 	
 	@Autowired
-	private  DipendenteRepository repository;
+	private  DipendenteRepository dipRepository;
 	@Autowired
 	private CurriculumRepository cr;
 	
@@ -35,20 +39,44 @@ public class GamaController {
 	@Autowired 
 	private PassaggioCommand pc;
 	
-	@GetMapping("/")
-	public void test() {			
-		 DipendenteModel dmIn = repository.save(new DipendenteModel("Gianni", "Fappucchioni", "98754gg"));
+	@Autowired
+	private ElencaMansioniCommand command;
+	
+	
+	
+	@GetMapping("/test1")
+	public void testTabellaDipendente() {			
+		 DipendenteModel dmIn = dipRepository.save(new DipendenteModel("Gianni", "Fappucchioni", "98754gg"));
 		
 	}
+	
+	@GetMapping("/test2")
+	public void testTabellaMansioniLavorative() {
+		
+		MansioniLavorativeModel dmIn = mlr.save(new MansioniLavorativeModel(dipRepository.findByNumeroBadge("98754gg"), "Junior Developer", "Gama project", true , true ));
+	}
+	
+	@Transactional
+	@GetMapping("/test3") //pulizia tabella mansioni lavorative
+	public void cancellaById(@RequestParam("id") Long id) {
+		mlr.deleteById(id);		
+	}
+	
+	
+		
+	
 	
 	@GetMapping("/mostradipendenti")
 	public List<DipendenteModel> elencaDipendenti() {
 		return dipRepository.findAll();
-	} 
+	}
 	
+	
+	@Transactional
 	@PostMapping("/cancelladipendente")
-	public DipendenteModel cancellaDipendente(@RequestParam("numeroBadge") String numeroBadge) {
-		return dipRepository.deleteByNumeroBadge(numeroBadge);		
+	public String cancellaDipendente(@RequestParam("numeroBadge") String numeroBadge) {
+		dipRepository.deleteByNumeroBadge(numeroBadge);
+		return "Utente cancellato";		
 	}
 	
 	

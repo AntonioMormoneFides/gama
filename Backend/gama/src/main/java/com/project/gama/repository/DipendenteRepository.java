@@ -7,7 +7,7 @@ import com.project.gama.model.DipendenteModel;
 @Repository
 public interface DipendenteRepository extends JpaRepository <DipendenteModel, Integer> {
 	
-	public DipendenteModel deleteByNumeroBadge(String numeroBadge);
+	public void deleteByNumeroBadge(String numeroBadge);
 	public DipendenteModel findByNumeroBadge(String numeroBadge);
 	
 

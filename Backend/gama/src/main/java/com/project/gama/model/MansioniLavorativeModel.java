@@ -15,13 +15,26 @@ public class MansioniLavorativeModel {
 	}
 	
 	public MansioniLavorativeModel(Long id, String ruolo, String progetto, boolean tipoContratto,
-			boolean statoLavorativo) {	
-	
+			boolean statoLavorativo) {
+		this.id= id;	
 		this.ruolo = ruolo;
 		this.progetto = progetto;
 		this.tipoContratto = tipoContratto;
 		this.statoLavorativo = statoLavorativo;
 	}
+	
+	public MansioniLavorativeModel( DipendenteModel idDipendente, String ruolo, String progetto, boolean tipoContratto,
+			boolean statoLavorativo) {
+			
+		this.ruolo = ruolo;
+		this.progetto = progetto;
+		this.tipoContratto = tipoContratto;
+		this.statoLavorativo = statoLavorativo;
+	}
+	
+	
+	
+	
 	
 	@ManyToOne
 	@JoinColumn(name="idDipendente") 
@@ -77,6 +90,14 @@ public class MansioniLavorativeModel {
 
 	public void setStatoLavorativo(boolean statoLavorativo) {
 		this.statoLavorativo = statoLavorativo;
+	}
+
+	public DipendenteModel getDipendente() {
+		return dipendente;
+	}
+
+	public void setDipendente(DipendenteModel dipendente) {
+		this.dipendente = dipendente;
 	}
 	
 	
