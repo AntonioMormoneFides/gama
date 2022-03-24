@@ -26,7 +26,7 @@ public class DipendenteModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idDipendente")
-	private Integer idDipendente;
+	private Long idDipendente;
 	
 	private String nome;
 	
@@ -44,11 +44,11 @@ public class DipendenteModel {
 	private Set <CurriculumModel> curricula;
 	
 
-	public Integer getIdDipendente() {
+	public Long getIdDipendente() {
 		return idDipendente;
 	}
 
-	public void setIdDipendente(Integer id) {
+	public void setIdDipendente(Long id) {
 		this.idDipendente = id;
 	}
 

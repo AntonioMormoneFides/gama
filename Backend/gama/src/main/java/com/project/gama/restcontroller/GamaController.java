@@ -24,10 +24,15 @@ public class GamaController {
 		return repository.save(new DipendenteModel("toto", "peppino", "la mala femmina"));		
 	}
 	
-	@GetMapping("/alldipendenti")
+	@GetMapping("/mostradipendenti")
 	public List<DipendenteModel> elencaDipendenti() {
 		return repository.findAll();
 	} 
+	
+	@PostMapping("/cancelladipendente")
+	public List<DipendenteModel> cancellaDipendente(String numeroBadge) {
+		return repository.deleteByNumeroBadge(numeroBadge);		
+	}
 
 	@PostMapping("/registro")
 	public LogPassaggioDipendenteDTO passaggio(@RequestParam("numeroBadge") String numeroBadge) {
