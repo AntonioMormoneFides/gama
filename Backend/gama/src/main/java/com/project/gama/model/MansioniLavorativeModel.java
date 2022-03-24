@@ -15,8 +15,7 @@ public class MansioniLavorativeModel {
 	}
 	
 	public MansioniLavorativeModel(Long id, String ruolo, String progetto, boolean tipoContratto,
-			boolean statoLavorativo) {
-		super();
+			boolean statoLavorativo) {	
 	
 		this.ruolo = ruolo;
 		this.progetto = progetto;
@@ -30,9 +29,7 @@ public class MansioniLavorativeModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	
+	private Long id;	
 	
 	private String ruolo;
 	

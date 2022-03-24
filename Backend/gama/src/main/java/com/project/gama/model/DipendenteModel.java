@@ -24,8 +24,7 @@ public class DipendenteModel {
 	}
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idDipendente")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long idDipendente;
 	
 	private String nome;

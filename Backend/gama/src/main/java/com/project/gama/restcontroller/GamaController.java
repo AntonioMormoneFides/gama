@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.gama.command.ElencaMansioniCommand;
 import com.project.gama.model.DipendenteModel;
+import com.project.gama.model.MansioniLavorativeModel;
 import com.project.gama.repository.DipendenteRepository;
+import com.project.gama.repository.MansioniLavorativeRepository;
+import com.project.gama.service.MainService;
 
 import dtoClasses.LogPassaggioDipendenteDTO;
 
@@ -18,21 +22,27 @@ import dtoClasses.LogPassaggioDipendenteDTO;
 public class GamaController {
 	
 	@Autowired
-	private  DipendenteRepository repository;
+	private  DipendenteRepository dipRepository;
+	@Autowired
+	private  MansioniLavorativeRepository mlRepository;
+	@Autowired
+	private ElencaMansioniCommand command;
+	@Autowired
+	private MainService ma;
 	
 	@GetMapping("/")
 	public DipendenteModel test() {			
-		return repository.save(new DipendenteModel("toto", "peppino", "la mala femmina"));		
+		return dipRepository.save(new DipendenteModel("toto", "peppino", "la mala femmina"));		
 	}
 	
 	@GetMapping("/mostradipendenti")
 	public List<DipendenteModel> elencaDipendenti() {
-		return repository.findAll();
+		return dipRepository.findAll();
 	} 
 	
 	@PostMapping("/cancelladipendente")
-	public List<DipendenteModel> cancellaDipendente(String numeroBadge) {
-		return repository.deleteByNumeroBadge(numeroBadge);		
+	public DipendenteModel cancellaDipendente(@RequestParam("numeroBadge") String numeroBadge) {
+		return dipRepository.deleteByNumeroBadge(numeroBadge);		
 	}
 
 	@PostMapping("/registro")
@@ -51,6 +61,14 @@ public class GamaController {
 	
 		return null;
 	}
+	
+	
+	@PostMapping("/mostradipendentimansioni")
+	public List<MansioniLavorativeModel> elencaMansioni(@RequestParam("numeroBadge") String numeroBadge) {		
+
+		return command.elencaMansioniDipendente(numeroBadge);
+	
+	} 
 	
 	
 	
