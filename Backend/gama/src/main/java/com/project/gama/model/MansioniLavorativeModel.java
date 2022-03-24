@@ -1,6 +1,7 @@
 package com.project.gama.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +11,16 @@ import javax.persistence.ManyToOne;
 @Entity
 public class MansioniLavorativeModel {
 	
+	public MansioniLavorativeModel(DipendenteModel dipendente, String ruolo, String progetto, boolean tipoContratto,
+			boolean statoLavorativo) {
+		super();
+		this.dipendente = dipendente;
+		this.ruolo = ruolo;
+		this.progetto = progetto;
+		this.tipoContratto = tipoContratto;
+		this.statoLavorativo = statoLavorativo;
+	}
+
 	public MansioniLavorativeModel() {
 		
 	}
@@ -23,7 +34,7 @@ public class MansioniLavorativeModel {
 		this.statoLavorativo = statoLavorativo;
 	}
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="idDipendente") 
 	private DipendenteModel dipendente;	
 	
@@ -77,6 +88,14 @@ public class MansioniLavorativeModel {
 
 	public void setStatoLavorativo(boolean statoLavorativo) {
 		this.statoLavorativo = statoLavorativo;
+	}
+
+	public DipendenteModel getDipendente() {
+		return dipendente;
+	}
+
+	public void setDipendente(DipendenteModel dipendente) {
+		this.dipendente = dipendente;
 	}
 	
 	

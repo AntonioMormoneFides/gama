@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,13 +34,13 @@ public class DipendenteModel {
 	
 	private String numeroBadge;
 	
-	@OneToMany(mappedBy="dipendente", cascade= CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="dipendente", cascade= CascadeType.ALL)
 	private Set <RegistroEntrateUsciteModel> registro;
 	
-	@OneToMany(mappedBy="dipendente", cascade= CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="dipendente", cascade= CascadeType.ALL)
 	private Set <MansioniLavorativeModel> mansioni;
 	
-	@OneToMany(mappedBy="dipendente", cascade= CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="dipendente", cascade= CascadeType.ALL)
 	private Set <CurriculumModel> curricula;
 	
 

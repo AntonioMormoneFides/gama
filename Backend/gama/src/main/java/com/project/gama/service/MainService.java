@@ -26,7 +26,7 @@ public class MainService {
 	
 	public LogPassaggioDipendenteDTO passaggio(String numeroBadge, String data) {
 		
-		DipendenteModel dm = dr.findOneByNumeroBadge(numeroBadge);
+		DipendenteModel dm = dr.findByNumeroBadge(numeroBadge);
 		LocalDate dataConvertita = LocalDate.parse(data);
 		RegistroEntrateUsciteModel mock = reur.findOneByDipendenteAndGiorno(dm, dataConvertita);
 		
@@ -40,6 +40,7 @@ public class MainService {
 			perEntrata = reur.save(new RegistroEntrateUsciteModel(LocalTime.now(), null, dataConvertita, dm));
 			mockLog = new LogPassaggioDipendenteDTO(dm.getNome(), dm.getCognome(), perEntrata.getEntrata(), null, dataConvertita);
 		} else {
+			
 			perUscita  = reur.save(new RegistroEntrateUsciteModel(mock.getId(), mock.getEntrata(), LocalTime.now(), dataConvertita, dm));
 			mockLog = new LogPassaggioDipendenteDTO(dm.getNome(), dm.getCognome(), mock.getEntrata(), perUscita.getUscita(), dataConvertita);
 		}
@@ -54,7 +55,7 @@ public class MainService {
 	
 	public List<MansioniLavorativeModel> mostraMansioniDipendente (String numeroBadge) {		
 		DipendenteModel dipendenteTrovato = dipRepository.findByNumeroBadge(numeroBadge);		
-		return mlRepository.findAllByDipendente(dipendenteTrovato.getIdDipendente());		
+		return mlRepository.findAllByDipendente(dipendenteTrovato);
 		}
 	
 	
