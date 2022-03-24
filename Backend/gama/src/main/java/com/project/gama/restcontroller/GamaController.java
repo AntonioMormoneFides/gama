@@ -1,5 +1,6 @@
 package com.project.gama.restcontroller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +36,7 @@ public class GamaController {
 	}
 
 	@PostMapping("/registro")
-	public LogPassaggioDipendenteDTO passaggio(@RequestParam("numeroBadge") String numeroBadge) {
-		
-		
-		
-		return null;
-	}
-	
-	
-	@GetMapping("/cambioBadge")
-	public List<DipendenteModel> passaggio() {
+	public LogPassaggioDipendenteDTO passaggio(@RequestParam("numeroBadge") String numeroBadge, @RequestParam("data") LocalDate data ) {
 		
 		
 		
@@ -53,7 +45,7 @@ public class GamaController {
 	
 	
 	@PostMapping("/cambioBadge")
-	public DipendenteModel passaggio(@RequestParam("numeroBadge") String numeroBadge, @RequestParam("id") int id) {
+	public DipendenteModel passaggio(@RequestParam("numeroVecchioBadge") String numeroVecchioBadge, @RequestParam("numeroNuovoBadge") String numeroNuovoBadge ) {
 		
 		
 	

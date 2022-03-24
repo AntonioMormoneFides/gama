@@ -25,6 +25,7 @@ public class CurriculumModel {
 	private String esperienzeLavoro;
 	@Column(length = 65535, columnDefinition="Text")
 	private String autodescrizione;
+	
 	public Integer getId() {
 		return id;
 	}

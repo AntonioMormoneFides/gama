@@ -14,10 +14,10 @@ public class MansioniLavorativeModel {
 		
 	}
 	
-	public MansioniLavorativeModel(Integer id, String ruolo, String progetto, boolean tipoContratto,
+	public MansioniLavorativeModel(Long id, String ruolo, String progetto, boolean tipoContratto,
 			boolean statoLavorativo) {
 		super();
-		this.id = id;
+	
 		this.ruolo = ruolo;
 		this.progetto = progetto;
 		this.tipoContratto = tipoContratto;
