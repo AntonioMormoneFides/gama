@@ -1,5 +1,7 @@
 package com.project.gama.command;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +32,10 @@ public class PassaggioCommand {
 	}
 	 
 	
+	public LogPassaggioDipendenteDTO doStuff(String numeroBadge, String data) {
+		
+		return ma.passaggio(numeroBadge, data);
+	}
 
 	
 	
