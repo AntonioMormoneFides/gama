@@ -26,14 +26,16 @@ public class MansioniLavorativeModel {
 		this.statoLavorativo = statoLavorativo;
 	}
 	
-	public MansioniLavorativeModel( DipendenteModel idDipendente, String ruolo, String progetto, boolean tipoContratto,
+	public MansioniLavorativeModel(DipendenteModel idDipendente, String ruolo, String progetto, boolean tipoContratto,
 			boolean statoLavorativo) {
-			
+		this.dipendente=idDipendente;	
 		this.ruolo = ruolo;
 		this.progetto = progetto;
 		this.tipoContratto = tipoContratto;
 		this.statoLavorativo = statoLavorativo;
 	}
+	
+	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="idDipendente") 

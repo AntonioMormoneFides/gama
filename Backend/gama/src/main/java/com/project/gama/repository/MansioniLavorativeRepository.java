@@ -12,4 +12,6 @@ import com.project.gama.model.MansioniLavorativeModel;
 public interface MansioniLavorativeRepository extends JpaRepository <MansioniLavorativeModel, Long> {
 	public List<MansioniLavorativeModel> findAllByDipendente(DipendenteModel dipendente);
 
+	public void deleteById(Long id);
+
 }

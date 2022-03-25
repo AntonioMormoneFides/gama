@@ -2,7 +2,6 @@ package com.project.gama.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,12 +54,22 @@ public class MainService {
 		return mockLog;
 	}
 	
+
+	
 	
 	public List<MansioniLavorativeModel> mostraMansioniDipendente (String numeroBadge) {		
 		DipendenteModel dipendenteTrovato = dipRepository.findByNumeroBadge(numeroBadge);		
-		return mlRepository.findAllByDipendente(dipendenteTrovato);
+		return mlRepository.findAllByDipendente(dipendenteTrovato);	
 		}
 	
+	public void cancellaByNumeroBadge(String numeroBadge) {
+		dr.deleteByNumeroBadge(numeroBadge);		
+	}
+	
+	
+	public List<DipendenteModel> elencaDipendenti() {
+		return dipRepository.findAll();
+	}
 	
 	public DipendenteModel cambiaBadge(String vecchioBadge, String nuovoBadge){
 		

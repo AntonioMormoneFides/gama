@@ -5,21 +5,20 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.gama.command.CancellaDipendenteCommand;
 import com.project.gama.command.ElencaMansioniCommand;
+import com.project.gama.command.MostraDipendentiCommand;
 import com.project.gama.command.PassaggioBadgeCommand;
 import com.project.gama.command.PassaggioCommand;
 import com.project.gama.model.DipendenteModel;
 import com.project.gama.model.MansioniLavorativeModel;
-import com.project.gama.repository.CurriculumRepository;
 import com.project.gama.repository.DipendenteRepository;
 import com.project.gama.repository.MansioniLavorativeRepository;
-import com.project.gama.repository.RegistroEntrateUsciteRepository;
 
 import dtoClasses.LogPassaggioDipendenteDTO;
 
@@ -28,14 +27,11 @@ public class GamaController {
 	
 	@Autowired
 	private  DipendenteRepository dipRepository;
-	@Autowired
-	private CurriculumRepository cr;
+
 	
 	@Autowired
 	private MansioniLavorativeRepository mlr;
 	
-	@Autowired 
-	private RegistroEntrateUsciteRepository reur;
 	
 	@Autowired 
 	private PassaggioCommand pc;
@@ -44,21 +40,25 @@ public class GamaController {
 	private ElencaMansioniCommand command;
 	
 	@Autowired
+	private CancellaDipendenteCommand cd;
+	
+	@Autowired
+	private MostraDipendentiCommand md;
 	private PassaggioBadgeCommand pbc;
 	
 	
 	
 	@GetMapping("/test1")
 	public void testTabellaDipendente() {			
-		 DipendenteModel dmIn = dipRepository.save(new DipendenteModel("Gianni", "Fappucchioni", "98754gg"));
+		dipRepository.save(new DipendenteModel("Gianni", "Fappucchioni", "98754gg"));
 		
 	}
 
     @GetMapping("/test2")
     public void testTabellaMansioniLavorative() {
-        MansioniLavorativeModel dmIn = mlr.save(new MansioniLavorativeModel(dipRepository.findByNumeroBadge("Giovanni"), "Junior Developer", "Gama project", true , true ));
-    }
-
+        mlr.save(new MansioniLavorativeModel(dipRepository.findByNumeroBadge("98754gg"), "Junior Developer", "Gama project", true , true ));
+    }	
+	
 	
 	@Transactional
 	@GetMapping("/test3") //pulizia tabella mansioni lavorative
@@ -72,15 +72,18 @@ public class GamaController {
 	
 	@GetMapping("/mostradipendenti")
 	public List<DipendenteModel> elencaDipendenti() {
-		return dipRepository.findAll();
+		return md.elencaTuttiDipendenti();
 	}
 	
 	
 	@Transactional
 	@PostMapping("/cancelladipendente")
 	public String cancellaDipendente(@RequestParam("numeroBadge") String numeroBadge) {
-		dipRepository.deleteByNumeroBadge(numeroBadge);
-		return "Utente cancellato";		
+		
+		cd.licenziaDipendenteByNumeroBadge(numeroBadge);
+		return "Dipendente cancellato";
+		
+		
 	}
 
 	
@@ -103,9 +106,7 @@ public class GamaController {
 	
 	@Transactional
 	@PostMapping("/mostradipendentimansioni")
-	public List<MansioniLavorativeModel> elencaMansioni(@RequestParam("numeroBadge") String numeroBadge) {		
-
-		System.out.println(numeroBadge);
+	public List<MansioniLavorativeModel> elencaMansioni(@RequestParam("numeroBadge") String numeroBadge) {				
 		
 		return command.elencaMansioniDipendente(numeroBadge);
 	
