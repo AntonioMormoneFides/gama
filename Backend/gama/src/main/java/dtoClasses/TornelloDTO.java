@@ -2,12 +2,15 @@ package dtoClasses;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
+
 public class TornelloDTO {
 
 	
 	String numeroBadge;
 	LocalDate data;
-	
 	public String getNumeroBadge() {
 		return numeroBadge;
 	}
@@ -28,6 +31,8 @@ public class TornelloDTO {
 	public TornelloDTO() {
 		super();
 	}
+	
+
 	
 	
 	
