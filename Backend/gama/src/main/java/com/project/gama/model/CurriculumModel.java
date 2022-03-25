@@ -19,11 +19,13 @@ public class CurriculumModel {
 	@JoinColumn(name="idDipendente") 
 	private DipendenteModel dipendente;	
 		
-	@Column(length = 65535, columnDefinition="Text")
+	@Column(length=5)  //"varchar(max)"	
 	private String esperienzeStudio;
-	@Column(length = 65535, columnDefinition="Text")
+	
+	@Column //"varchar(max)"
 	private String esperienzeLavoro;
-	@Column(length = 65535, columnDefinition="Text")
+	
+	@Column  //"varchar(max)"
 	private String autodescrizione;
 	
 	public Integer getId() {
