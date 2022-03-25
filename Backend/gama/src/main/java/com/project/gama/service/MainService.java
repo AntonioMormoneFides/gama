@@ -54,6 +54,17 @@ public class MainService {
 		return mockLog;
 	}
 	
+	
+	public LogPassaggioDipendenteDTO passaggioLeggi(String numeroBadge, String data) {
+		
+		DipendenteModel dm = dr.findByNumeroBadge(numeroBadge);
+		LocalDate dataConvertita = LocalDate.parse(data);
+		LogPassaggioDipendenteDTO mockLog = null;
+		RegistroEntrateUsciteModel reg = reur.findOneByDipendenteAndGiorno(dm, dataConvertita);
+		mockLog = new LogPassaggioDipendenteDTO(dm.getNome(), dm.getCognome(), reg.getEntrata(), reg.getUscita(), dataConvertita);
+		return mockLog;
+	}
+	
 
 	
 	

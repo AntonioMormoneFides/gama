@@ -15,6 +15,7 @@ import com.project.gama.command.ElencaMansioniCommand;
 import com.project.gama.command.MostraDipendentiCommand;
 import com.project.gama.command.PassaggioBadgeCommand;
 import com.project.gama.command.PassaggioCommand;
+import com.project.gama.command.PassaggioCommandLeggi;
 import com.project.gama.model.DipendenteModel;
 import com.project.gama.model.MansioniLavorativeModel;
 import com.project.gama.repository.DipendenteRepository;
@@ -44,8 +45,11 @@ public class GamaController {
 	
 	@Autowired
 	private MostraDipendentiCommand md;
+	@Autowired
 	private PassaggioBadgeCommand pbc;
 	
+	@Autowired
+	private PassaggioCommandLeggi pcl;
 	
 	
 	@GetMapping("/test1")
@@ -89,10 +93,18 @@ public class GamaController {
 	
 	
 	@Transactional
-	@PostMapping("/registro")
-	public LogPassaggioDipendenteDTO passaggioTornello(@RequestParam("numeroBadge") String numeroBadge, @RequestParam("data") String data ) {
+	@PostMapping("/registro/scrivi")
+	public LogPassaggioDipendenteDTO passaggioTornelloScrivi(@RequestParam("numeroBadge") String numeroBadge, @RequestParam("data") String data ) {
 		
 		return pc.doStuff(numeroBadge, data);
+	
+	}
+	
+	@Transactional
+	@PostMapping("/registro/leggi")
+	public LogPassaggioDipendenteDTO passaggioTornelloLeggi(@RequestParam("numeroBadge") String numeroBadge, @RequestParam("data") String data ) {
+		
+		return pcl.doStuff(numeroBadge, data);
 	
 	}
 	
