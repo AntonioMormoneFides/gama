@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,106 +26,95 @@ import dtoClasses.LogPassaggioDipendenteDTO;
 
 @RestController
 public class GamaController {
-	
-	@Autowired
-	private  DipendenteRepository dipRepository;
 
-	
+	@Autowired
+	private DipendenteRepository dipRepository;
+
 	@Autowired
 	private MansioniLavorativeRepository mlr;
-	
-	
-	@Autowired 
+
+	@Autowired
 	private PassaggioCommand pc;
-	
+
 	@Autowired
 	private ElencaMansioniCommand command;
-	
+
 	@Autowired
 	private CancellaDipendenteCommand cd;
-	
+
 	@Autowired
 	private MostraDipendentiCommand md;
 	@Autowired
 	private PassaggioBadgeCommand pbc;
-	
+
 	@Autowired
 	private PassaggioCommandLeggi pcl;
-	
-	
+
 	@GetMapping("/test1")
-	public void testTabellaDipendente() {			
+	public void testTabellaDipendente() {
 		dipRepository.save(new DipendenteModel("Gianni", "Fappucchioni", "98754gg"));
-		
+
 	}
 
-    @GetMapping("/test2")
-    public void testTabellaMansioniLavorative() {
-        mlr.save(new MansioniLavorativeModel(dipRepository.findByNumeroBadge("98754gg"), "Junior Developer", "Gama project", true , true ));
-    }	
-	
-	
-	@Transactional
-	@GetMapping("/test3") //pulizia tabella mansioni lavorative
-	public void cancellaById(@RequestParam("id") Long id) {
-		mlr.deleteById(id);		
+	@GetMapping("/test2")
+	public void testTabellaMansioniLavorative() {
+		mlr.save(new MansioniLavorativeModel(dipRepository.findByNumeroBadge("98754gg"), "Junior Developer",
+				"Gama project", true, true));
 	}
-	
-	
-		
-	
-	
+
+	@Transactional
+	@GetMapping("/test3") // pulizia tabella mansioni lavorative
+	public void cancellaById(@RequestParam("id") Long id) {
+		mlr.deleteById(id);
+	}
+
 	@GetMapping("/mostradipendenti")
 	public List<DipendenteModel> elencaDipendenti() {
 		return md.elencaTuttiDipendenti();
 	}
-	
-	
+
 	@Transactional
 	@PostMapping("/cancelladipendente")
 	public String cancellaDipendente(@RequestParam("numeroBadge") String numeroBadge) {
-		
+
 		cd.licenziaDipendenteByNumeroBadge(numeroBadge);
 		return "Dipendente cancellato";
-		
-		
+
 	}
 
-	
-	
 	@Transactional
 	@PostMapping("/registro/scrivi")
-	public LogPassaggioDipendenteDTO passaggioTornelloScrivi(@RequestParam("numeroBadge") String numeroBadge, @RequestParam("data") String data ) {
-		
+	public LogPassaggioDipendenteDTO passaggioTornelloScrivi(@RequestParam("numeroBadge") String numeroBadge,
+			@RequestParam("data") String data) {
+
 		return pc.doStuff(numeroBadge, data);
-	
-	}
-	
-	@Transactional
-	@PostMapping("/registro/leggi")
-	public LogPassaggioDipendenteDTO passaggioTornelloLeggi(@RequestParam("numeroBadge") String numeroBadge, @RequestParam("data") String data ) {
-		
-		return pcl.doStuff(numeroBadge, data);
-	
-	}
-	
-	@Transactional
-	@PostMapping("/cambioBadge")
-	public DipendenteModel passaggioBadge(@RequestParam("numeroVecchioBadge") String numeroVecchioBadge, @RequestParam("numeroNuovoBadge") String numeroNuovoBadge ) {
-		
-		return	pbc.doStuff(numeroVecchioBadge, numeroNuovoBadge);
 
 	}
-	
+
+	@Transactional
+	@PostMapping("/registro/leggi")
+	public LogPassaggioDipendenteDTO passaggioTornelloLeggi(@RequestParam("numeroBadge") String numeroBadge,
+			@RequestParam("data") String data) {
+
+		return pcl.doStuff(numeroBadge, data);
+
+	}
+
+	@Transactional
+	@PostMapping("/cambioBadge")
+	public DipendenteModel passaggioBadge(@RequestParam("numeroVecchioBadge") String numeroVecchioBadge,
+			@RequestParam("numeroNuovoBadge") String numeroNuovoBadge) {
+
+		return pbc.doStuff(numeroVecchioBadge, numeroNuovoBadge);
+
+	}
+
 	@Transactional
 	@PostMapping("/mostradipendentimansioni")
-	public List<MansioniLavorativeModel> elencaMansioni(@RequestParam("numeroBadge") String numeroBadge) {				
-		
+	public List<MansioniLavorativeModel> elencaMansioni(@RequestParam("numeroBadge") String numeroBadge) {
+
 		return command.elencaMansioniDipendente(numeroBadge);
-	
-	} 
-	
-	
-	
+
+	}
 
 }
