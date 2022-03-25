@@ -9,7 +9,7 @@ import com.project.gama.model.DipendenteModel;
 import com.project.gama.model.MansioniLavorativeModel;
 
 @Repository
-public interface MansioniLavorativeRepository extends JpaRepository <MansioniLavorativeModel, Integer> {
+public interface MansioniLavorativeRepository extends JpaRepository <MansioniLavorativeModel, Long> {
 	public List<MansioniLavorativeModel> findAllByDipendente(DipendenteModel dipendente);
 
 }

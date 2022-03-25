@@ -59,7 +59,6 @@ public class MainService {
 	public List<MansioniLavorativeModel> mostraMansioniDipendente (String numeroBadge) {		
 		DipendenteModel dipendenteTrovato = dipRepository.findByNumeroBadge(numeroBadge);		
 		return mlRepository.findAllByDipendente(dipendenteTrovato);
-		return mlRepository.findAllByDipendente(dipendenteTrovato);		
 		}
 	
 	

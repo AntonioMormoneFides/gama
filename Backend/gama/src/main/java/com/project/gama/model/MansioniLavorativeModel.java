@@ -11,15 +11,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class MansioniLavorativeModel {
 	
-	public MansioniLavorativeModel(DipendenteModel dipendente, String ruolo, String progetto, boolean tipoContratto,
-			boolean statoLavorativo) {
-		super();
-		this.dipendente = dipendente;
-		this.ruolo = ruolo;
-		this.progetto = progetto;
-		this.tipoContratto = tipoContratto;
-		this.statoLavorativo = statoLavorativo;
-	}
+
 
 	public MansioniLavorativeModel() {
 		

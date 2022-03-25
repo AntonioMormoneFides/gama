@@ -43,6 +43,9 @@ public class GamaController {
 	@Autowired
 	private ElencaMansioniCommand command;
 	
+	@Autowired
+	private PassaggioBadgeCommand pbc;
+	
 	
 	
 	@GetMapping("/test1")
@@ -55,12 +58,7 @@ public class GamaController {
     public void testTabellaMansioniLavorative() {
         MansioniLavorativeModel dmIn = mlr.save(new MansioniLavorativeModel(dipRepository.findByNumeroBadge("Giovanni"), "Junior Developer", "Gama project", true , true ));
     }
-	
-	@GetMapping("/test2")
-	public void testTabellaMansioniLavorative() {
-		
-		MansioniLavorativeModel dmIn = mlr.save(new MansioniLavorativeModel(dipRepository.findByNumeroBadge("98754gg"), "Junior Developer", "Gama project", true , true ));
-	}
+
 	
 	@Transactional
 	@GetMapping("/test3") //pulizia tabella mansioni lavorative
@@ -80,19 +78,6 @@ public class GamaController {
 	
 	@Transactional
 	@PostMapping("/cancelladipendente")
-	public DipendenteModel cancellaDipendente(@RequestParam("numeroBadge") String numeroBadge) {
-		
-		System.out.println("ci sono quasi");
-		
-		DipendenteModel daCancellare = dipRepository.findByNumeroBadge(numeroBadge);
-		
-		dipRepository.deleteByNumeroBadge(numeroBadge);
-		
-		return daCancellare;
-		
-//		dipRepository.deleteAll();
-//		
-//		return new DipendenteModel();
 	public String cancellaDipendente(@RequestParam("numeroBadge") String numeroBadge) {
 		dipRepository.deleteByNumeroBadge(numeroBadge);
 		return "Utente cancellato";		
