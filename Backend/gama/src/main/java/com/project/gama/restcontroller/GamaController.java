@@ -6,7 +6,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +24,7 @@ import com.project.gama.model.MansioniLavorativeModel;
 import com.project.gama.repository.DipendenteRepository;
 import com.project.gama.repository.MansioniLavorativeRepository;
 
+import dtoClasses.BadgeDTO;
 import dtoClasses.LogPassaggioDipendenteDTO;
 import dtoClasses.TornelloDTO;
 
@@ -114,8 +114,10 @@ public class GamaController {
 
 	@Transactional
 	@PostMapping("/mostradipendentimansioni")
-	public List<MansioniLavorativeModel> elencaMansioni(@RequestParam("numeroBadge") String numeroBadge) {
+	public List<MansioniLavorativeModel> elencaMansioni(@RequestBody BadgeDTO numeroBadge) {
 
+		System.out.println(numeroBadge);
+		
 		return command.elencaMansioniDipendente(numeroBadge);
 
 	}

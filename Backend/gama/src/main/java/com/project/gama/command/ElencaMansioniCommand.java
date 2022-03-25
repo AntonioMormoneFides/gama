@@ -10,6 +10,8 @@ import com.project.gama.repository.DipendenteRepository;
 import com.project.gama.repository.MansioniLavorativeRepository;
 import com.project.gama.service.MainService;
 
+import dtoClasses.BadgeDTO;
+
 @Component
 public class ElencaMansioniCommand {
 	
@@ -62,7 +64,8 @@ public class ElencaMansioniCommand {
 
 
 
-	public List<MansioniLavorativeModel> elencaMansioniDipendente(String numeroBadge) {
+	public List<MansioniLavorativeModel> elencaMansioniDipendente(BadgeDTO numeroBadge) {
+		System.out.println(numeroBadge);
 		return ma.mostraMansioniDipendente(numeroBadge);
 	}
 	
