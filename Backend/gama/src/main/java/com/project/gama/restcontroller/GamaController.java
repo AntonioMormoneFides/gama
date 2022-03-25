@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.gama.command.ElencaMansioniCommand;
+import com.project.gama.command.PassaggioBadgeCommand;
 import com.project.gama.command.PassaggioCommand;
 import com.project.gama.model.DipendenteModel;
 import com.project.gama.model.MansioniLavorativeModel;
@@ -41,6 +42,9 @@ public class GamaController {
 	@Autowired 
 	private ElencaMansioniCommand command;
 	
+	@Autowired
+	private PassaggioBadgeCommand pbc;
+	
 	@GetMapping("/")
 	public void test() {			
 		 DipendenteModel dmIn = dipRepository.save(new DipendenteModel("Giovanni", "Mario", "Giovanni"));
@@ -69,10 +73,9 @@ public class GamaController {
 		
 		return daCancellare;
 		
-//		dipRepository.deleteAll();
-//		
-//		return new DipendenteModel();
+
 	}
+
 	
 	
 	@Transactional
@@ -85,11 +88,10 @@ public class GamaController {
 	
 	@Transactional
 	@PostMapping("/cambioBadge")
-	public DipendenteModel passaggio(@RequestParam("numeroVecchioBadge") String numeroVecchioBadge, @RequestParam("numeroNuovoBadge") String numeroNuovoBadge ) {
+	public DipendenteModel passaggioBadge(@RequestParam("numeroVecchioBadge") String numeroVecchioBadge, @RequestParam("numeroNuovoBadge") String numeroNuovoBadge ) {
 		
-		
-	
-		return null;
+		return	pbc.doStuff(numeroVecchioBadge, numeroNuovoBadge);
+
 	}
 	
 	@Transactional

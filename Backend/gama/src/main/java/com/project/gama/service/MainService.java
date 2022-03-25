@@ -2,27 +2,34 @@ package com.project.gama.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.gama.model.DipendenteModel;
+import com.project.gama.model.MansioniLavorativeModel;
 import com.project.gama.model.RegistroEntrateUsciteModel;
 import com.project.gama.repository.DipendenteRepository;
+import com.project.gama.repository.MansioniLavorativeRepository;
 import com.project.gama.repository.RegistroEntrateUsciteRepository;
 
 import dtoClasses.LogPassaggioDipendenteDTO;
-import com.project.gama.model.MansioniLavorativeModel;
-import com.project.gama.repository.DipendenteRepository;
-import com.project.gama.repository.MansioniLavorativeRepository;
 
 @Service
 public class MainService {
 	
 	
-	@Autowired RegistroEntrateUsciteRepository reur;
-	@Autowired DipendenteRepository dr;
+	@Autowired 
+	RegistroEntrateUsciteRepository reur;
+	@Autowired 
+	DipendenteRepository dr;
+	@Autowired
+	DipendenteRepository dipRepository;
+	@Autowired
+	 MansioniLavorativeRepository mlRepository;
+	
 	
 	public LogPassaggioDipendenteDTO passaggio(String numeroBadge, String data) {
 		
@@ -47,10 +54,6 @@ public class MainService {
 		
 		return mockLog;
 	}
-	@Autowired
-	private  DipendenteRepository dipRepository;
-	@Autowired
-	private  MansioniLavorativeRepository mlRepository;
 	
 	
 	public List<MansioniLavorativeModel> mostraMansioniDipendente (String numeroBadge) {		
@@ -59,7 +62,19 @@ public class MainService {
 		}
 	
 	
+	public DipendenteModel cambiaBadge(String vecchioBadge, String nuovoBadge){
+		
+		
+		DipendenteModel old = dipRepository.findByNumeroBadge(vecchioBadge);
+		DipendenteModel newB = dipRepository.save(new DipendenteModel(old.getIdDipendente(), old.getNome(), old.getCognome(), nuovoBadge));
+		
 	
+		
+		
+		return newB;
+		
+		
+	}
 	
 
 	

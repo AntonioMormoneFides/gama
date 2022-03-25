@@ -14,6 +14,14 @@ import javax.persistence.OneToMany;
 @Entity
 public class DipendenteModel {
 	
+	public DipendenteModel(Long idDipendente, String nome, String cognome, String numeroBadge) {
+		super();
+		this.idDipendente = idDipendente;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.numeroBadge = numeroBadge;
+	}
+
 	public DipendenteModel() {
 	
 	}
