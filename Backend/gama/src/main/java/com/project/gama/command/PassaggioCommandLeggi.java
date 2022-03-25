@@ -7,6 +7,7 @@ import com.project.gama.repository.RegistroEntrateUsciteRepository;
 import com.project.gama.service.MainService;
 
 import dtoClasses.LogPassaggioDipendenteDTO;
+import dtoClasses.TornelloDTO;
 
 @Component
 public class PassaggioCommandLeggi {
@@ -36,8 +37,8 @@ public class PassaggioCommandLeggi {
 	
 	}
 	
-	public LogPassaggioDipendenteDTO doStuff(String numeroBadge, String data) {
+	public LogPassaggioDipendenteDTO doStuff(TornelloDTO tornello) {
 		
-		return ma.passaggioLeggi(numeroBadge, data);
+		return ma.passaggioLeggi(tornello);
 	}
 }

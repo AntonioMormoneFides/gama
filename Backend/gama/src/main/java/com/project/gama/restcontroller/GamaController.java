@@ -5,9 +5,10 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,8 +24,10 @@ import com.project.gama.repository.DipendenteRepository;
 import com.project.gama.repository.MansioniLavorativeRepository;
 
 import dtoClasses.LogPassaggioDipendenteDTO;
+import dtoClasses.TornelloDTO;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class GamaController {
 
 	@Autowired
@@ -84,19 +87,17 @@ public class GamaController {
 
 	@Transactional
 	@PostMapping("/registro/scrivi")
-	public LogPassaggioDipendenteDTO passaggioTornelloScrivi(@RequestParam("numeroBadge") String numeroBadge,
-			@RequestParam("data") String data) {
+	public LogPassaggioDipendenteDTO passaggioTornelloScrivi(@RequestBody TornelloDTO tornello) {
 
-		return pc.doStuff(numeroBadge, data);
+		return pc.doStuff(tornello);
 
 	}
 
 	@Transactional
 	@PostMapping("/registro/leggi")
-	public LogPassaggioDipendenteDTO passaggioTornelloLeggi(@RequestParam("numeroBadge") String numeroBadge,
-			@RequestParam("data") String data) {
+	public LogPassaggioDipendenteDTO passaggioTornelloLeggi(@RequestBody TornelloDTO tornello) {
 
-		return pcl.doStuff(numeroBadge, data);
+		return pcl.doStuff(tornello);
 
 	}
 

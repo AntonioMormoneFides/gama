@@ -15,6 +15,7 @@ import com.project.gama.repository.MansioniLavorativeRepository;
 import com.project.gama.repository.RegistroEntrateUsciteRepository;
 
 import dtoClasses.LogPassaggioDipendenteDTO;
+import dtoClasses.TornelloDTO;
 
 @Service
 public class MainService {
@@ -30,10 +31,14 @@ public class MainService {
 	 MansioniLavorativeRepository mlRepository;
 	
 	
-	public LogPassaggioDipendenteDTO passaggio(String numeroBadge, String data) {
+	public LogPassaggioDipendenteDTO passaggio(TornelloDTO tornello) {
+		
+		
+		String numeroBadge = tornello.getNumeroBadge();
+		LocalDate dataConvertita = tornello.getData();
 		
 		DipendenteModel dm = dr.findByNumeroBadge(numeroBadge);
-		LocalDate dataConvertita = LocalDate.parse(data);
+		
 		RegistroEntrateUsciteModel mock = reur.findOneByDipendenteAndGiorno(dm, dataConvertita);
 		
 		RegistroEntrateUsciteModel perEntrata = null;
@@ -55,10 +60,14 @@ public class MainService {
 	}
 	
 	
-	public LogPassaggioDipendenteDTO passaggioLeggi(String numeroBadge, String data) {
+	public LogPassaggioDipendenteDTO passaggioLeggi(TornelloDTO tornello) {
+		
+		String numeroBadge = tornello.getNumeroBadge();
+		
+		
 		
 		DipendenteModel dm = dr.findByNumeroBadge(numeroBadge);
-		LocalDate dataConvertita = LocalDate.parse(data);
+		LocalDate dataConvertita = tornello.getData();
 		LogPassaggioDipendenteDTO mockLog = null;
 		RegistroEntrateUsciteModel reg = reur.findOneByDipendenteAndGiorno(dm, dataConvertita);
 		mockLog = new LogPassaggioDipendenteDTO(dm.getNome(), dm.getCognome(), reg.getEntrata(), reg.getUscita(), dataConvertita);
